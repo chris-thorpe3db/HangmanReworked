@@ -21,13 +21,14 @@ using System.Collections.Generic;
 namespace HangmanReworked {
     public class Program {
         static string guessThisWord = null;
-        static string url = "https://random-word-api.herokuapp.com/word?number=1";
+        readonly static string url = "https://random-word-api.herokuapp.com/word?number=1";
         static string dashesToString = null;
         static string consoleInput = null;
-        static string rstlne = "rstlne";
+        static string playAgain = null;
+        readonly static string rstlne = "rstlne";
         static char[] dashes = null;
         static char charGuessed = ' ';
-        static char[] charsToTrim = { '[', ']', '"' };
+        readonly static char[] charsToTrim = { '[', ']', '"' };
         static List<char> charsGuessed = new List<char>();
         static bool wordIsNotExit = false;
         static bool breakpointReached = false;
@@ -36,7 +37,36 @@ namespace HangmanReworked {
         static int incorrectGuessesLeft = 10;
         
         public static void Main(string[] args) {
-            
+            Console.Clear();
+            Console.WriteLine("Welcome to hangman! \nPlease enter one character at a time, or the entire word. \nThere are no numbers or punctuation. \nYou have already been given the letters RSTLNE. \nTo exit, click the x button on the window, type \"exit\" into the console, or type CTRL + C at any time. \nGood luck, and have fun!");
+            while (true) {
+                PlayGame();
+                Console.WriteLine("Would you like to play again? (Y)es/(N)o");
+                playAgain = Console.ReadLine().ToLower();
+                if (playAgain == "n" || playAgain == "no") {
+                    Exit(0);
+                } else if (playAgain == "y" || playAgain == "yes") {
+                    continue;
+                } else {
+                    continue;
+                }
+            }
+        }
+
+        public static void PlayGame() {
+            // Set all variables to defaults (and clear char list) so we can play the game multiple times
+            guessThisWord = null;
+            dashesToString = null;
+            consoleInput = null;
+            dashes = null;
+            charGuessed = ' ';
+            charsGuessed.Clear();
+            wordIsNotExit = false;
+            breakpointReached = false;
+            userWon = false;
+            containsChar = false;
+            incorrectGuessesLeft = 10;
+
             // Get the word to guess from the API
             while (!wordIsNotExit) {
                 try {
@@ -73,9 +103,6 @@ namespace HangmanReworked {
 
             // Game will NOT run while this is true, so set it to false
             breakpointReached = false;
-
-            Console.Clear();
-            Console.WriteLine("Welcome to hangman! \nPlease enter one character at a time, or the entire word. \nThere are no numbers or punctuation. \nYou have already been given the letters RSTLNE. \nTo exit, click the x button on the window, type \"exit\" into the console, or type CTRL + C at any time. \nGood luck, and have fun!");
 			
             // Game Loop
             while (!breakpointReached) {
@@ -138,9 +165,6 @@ namespace HangmanReworked {
             } else {
                 Console.WriteLine("You lost! The word was: " + guessThisWord);
             }
-            Console.WriteLine("Press any key to continue.");
-            Console.ReadKey();
-            Exit(0);
         }
 
         public static void Exit(int code) {
