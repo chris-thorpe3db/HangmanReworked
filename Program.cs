@@ -24,11 +24,13 @@ namespace HangmanReworked {
             while (!wordIsNotExit) {
                 try {
                     guessThisWord = HangClient.GetWord(url).Result.Trim(charsToTrim);
+                    if (guessThisWord != "exit") wordIsNotExit = true;
                 } catch (Exception e) {
                     Console.WriteLine("Exception caught! Are you connected to the internet? \nDetails:\n");
                     Console.WriteLine(e.Message);
                     Console.WriteLine("Press any key to exit...");
                     Console.ReadKey();
+                    Exit(0);
                 }
             }
 
@@ -37,7 +39,7 @@ namespace HangmanReworked {
             for (int i = 0; i < guessThisWord.Length; i++) {
                 dashes[i] = '-';
             }
-            dashesToString = new string(dashes);
+            
 
             // Seek thru char awway for RSTLNE
 
@@ -50,6 +52,7 @@ namespace HangmanReworked {
             
             // Add RSTLNE to guess chars list so the user doesn't accidentally guess them again
             charsGuessed.AddRange(rstlne);
+            dashesToString = new string(dashes);
 
             // Game will NOT run while this is true, so set it to false
             breakpointReached = false;
@@ -72,7 +75,7 @@ namespace HangmanReworked {
                     Console.Clear();
                     break;
                 } else if (consoleInput == "exit") { // User wants to exit the game
-                    Environment.Exit(0);
+                    Exit(0);
                 } else if (consoleInput.Length != 1) { // Console input not 1 character, unable to parse
                     Console.Clear();
                     Console.WriteLine("Please enter only 1 letter!");
@@ -118,6 +121,13 @@ namespace HangmanReworked {
             } else {
                 Console.WriteLine("You lost! The word was: " + guessThisWord);
             }
+            Console.WriteLine("Press any key to continue.");
+            Console.ReadKey();
+            Exit(0);
+        }
+
+        public static void Exit(int code) {
+            Environment.Exit(code);
         }
     }
 }
