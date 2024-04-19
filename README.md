@@ -50,3 +50,5 @@ The full license legal text can be found within [LICENSE](https://github.com/chr
 This software comes with absolutely no liability or warranty.
 
 This repository and all contents are Copyright © 2024 Christopher Thorpe.
+
+![GNU GPL v3 logo](https://www.gnu.org/graphics/gplv3-127x51.png)
