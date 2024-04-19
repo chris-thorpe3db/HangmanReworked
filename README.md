@@ -43,7 +43,7 @@ As long as you:
  - Disclose the source (this repo)
  - Use the same license (GNU GPL v3.0)
 
-By downloading and using this software, you agree to this license.
+By modifying or distributing this software, you agree to this license.
 
 The full license legal text can be found within [LICENSE](https://github.com/chris-thorpe3db/HangmanReworked/blob/master/LICENSE).
 
