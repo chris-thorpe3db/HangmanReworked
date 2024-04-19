@@ -39,6 +39,8 @@ namespace HangmanReworked {
         public static void Main(string[] args) {
             Console.Clear();
             Console.WriteLine("Welcome to hangman! \nPlease enter one character at a time, or the entire word. \nThere are no numbers or punctuation. \nYou have already been given the letters RSTLNE. \nTo exit, click the x button on the window, type \"exit\" into the console, or type CTRL + C at any time. \nGood luck, and have fun!");
+            
+            // Plays Game, asks user if they would like to play again
             while (true) {
                 PlayGame();
                 Console.WriteLine("Would you like to play again? (Y)es/(N)o");
@@ -54,7 +56,7 @@ namespace HangmanReworked {
         }
 
         public static void PlayGame() {
-            // Set all variables to defaults (and clear char list) so we can play the game multiple times
+            // Set all variables to defaults and clear char list so we can play the game multiple times
             guessThisWord = null;
             dashesToString = null;
             consoleInput = null;
