@@ -20,6 +20,7 @@ namespace HangmanReworked {
         
         public static void Main(string[] args) {
             
+            // Get the word to guess from the API
             while (!wordIsNotExit) {
                 try {
                     guessThisWord = HangClient.GetWord(url).Result.Trim(charsToTrim);
@@ -30,8 +31,6 @@ namespace HangmanReworked {
                     Console.ReadKey();
                 }
             }
-            
-            // Get the word to guess from the API
 
             // Create a char array of the word to guess, convert to string so we can directly compare to the word
             dashes = new char[guessThisWord.Length];
@@ -70,6 +69,7 @@ namespace HangmanReworked {
                 if (consoleInput == guessThisWord) { // User guesses entire word
                     userWon = true;
                     dashesToString = guessThisWord;
+                    Console.Clear();
                     break;
                 } else if (consoleInput == "exit") { // User wants to exit the game
                     Environment.Exit(0);
@@ -100,6 +100,23 @@ namespace HangmanReworked {
                     incorrectGuessesLeft--;
                 
                 // Convert char array to string so we can compare it easily
+                dashesToString = new string(dashes);
+
+                // Check if the user has won or lost
+                if (dashesToString == guessThisWord) {
+                    userWon = true;
+                    breakpointReached = true;
+                } else if (incorrectGuessesLeft == 0) {
+                    userWon = false;
+                    breakpointReached = true;
+                } 
+
+                Console.Clear();
+            }
+            if (userWon) {
+                Console.WriteLine("Congratulations! The word was: " + guessThisWord + ". You had " + incorrectGuessesLeft + " incorrect guesses left.");
+            } else {
+                Console.WriteLine("You lost! The word was: " + guessThisWord);
             }
         }
     }
