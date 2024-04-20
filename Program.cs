@@ -90,7 +90,7 @@ namespace HangmanReworked {
             }
             
 
-            // Seek thru char awway for RSTLNE
+            // Seek thru char array for RSTLNE
 
             for (int x = 0; x < guessThisWord.Length; x++) {
                 for (int y = 0; y < rstlne.Length; y++) {
@@ -126,14 +126,14 @@ namespace HangmanReworked {
                     Console.Clear();
                     Console.WriteLine("Please enter only 1 letter!");
                     continue;
-                } else if (charsGuessed.Contains(char.Parse(consoleInput))) { // User already guessed this character
+                } else if (charsGuessed.Contains(consoleInput[0])) { // User already guessed this character
                     Console.Clear();
                     Console.WriteLine("You already guessed this character!");
                     continue;
                 } 
 
                 // Parse string to char: allows us to compare to individual characters in a string
-                charGuessed = char.Parse(consoleInput);
+                charGuessed = consoleInput[0];
                 charsGuessed.Add(charGuessed);
 
                 // Compare guessed char to every char in the word; replace dashes as neccessary
