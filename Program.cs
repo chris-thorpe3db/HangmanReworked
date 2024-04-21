@@ -20,13 +20,13 @@ using System.Collections.Generic;
 
 namespace HangmanReworked {
     public class Program {
-        static string guessThisWord = null;
+        static string? guessThisWord = null;
         readonly static string url = "https://random-word-api.herokuapp.com/word?number=1";
-        static string dashesToString = null;
-        static string consoleInput = null;
-        static string playAgain = null;
+        static string? dashesToString = null;
+        static string? consoleInput = null;
+        static string? playAgain = null;
         readonly static string rstlne = "rstlne";
-        static char[] dashes = null;
+        static char[]? dashes = null;
         static char charGuessed = ' ';
         readonly static char[] charsToTrim = { '[', ']', '"' };
         static List<char> charsGuessed = new List<char>();
@@ -44,7 +44,7 @@ namespace HangmanReworked {
             while (true) {
                 PlayGame();
                 Console.WriteLine("Would you like to play again? (Y)es/(N)o");
-                playAgain = Console.ReadLine().ToLower();
+                playAgain = Console.ReadLine()!.ToLower() ?? "   ";
                 if (playAgain == "n" || playAgain == "no") {
                     Exit(0);
                 } else if (playAgain == "y" || playAgain == "yes") {
@@ -73,7 +73,7 @@ namespace HangmanReworked {
             while (!wordIsNotExit) {
                 try {
                     guessThisWord = HangClient.GetWord(url).Result.Trim(charsToTrim);
-                    if (guessThisWord != "exit") wordIsNotExit = true;
+                    if (guessThisWord != "exit" && guessThisWord is not null) wordIsNotExit = true;
                 } catch (Exception e) {
                     Console.WriteLine("Exception caught! Are you connected to the internet? \nDetails:\n");
                     Console.WriteLine(e.Message);
@@ -84,7 +84,7 @@ namespace HangmanReworked {
             }
 
             // Create a char array of the word to guess, convert to string so we can directly compare to the word
-            dashes = new char[guessThisWord.Length];
+            dashes = new char[guessThisWord!.Length];
             for (int i = 0; i < guessThisWord.Length; i++) {
                 dashes[i] = '-';
             }
@@ -113,7 +113,7 @@ namespace HangmanReworked {
                 Console.WriteLine("Incorrect guesses left: " + incorrectGuessesLeft);
 
                 // Get user input, determine string length, parse when able/neccessary
-                consoleInput = Console.ReadLine().ToLower();
+                consoleInput = Console.ReadLine()!.ToLower();
 
                 if (consoleInput == guessThisWord) { // User guesses entire word
                     userWon = true;
