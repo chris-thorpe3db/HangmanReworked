@@ -1,4 +1,4 @@
-﻿/* HangmanReworked is a hangman game that runs in a C# console application.
+﻿/* HangmanReworked is a simple hangman game that runs in a console.
  * Copyright (C) 2024 Christopher Thorpe.
  * 
  * This program is free software: you can redistribute it and/or modify
@@ -17,6 +17,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection.Metadata.Ecma335;
 
 namespace HangmanReworked {
     public class Program {
@@ -37,6 +38,9 @@ namespace HangmanReworked {
         static int incorrectGuessesLeft = 10;
         
         public static void Main(string[] args) {
+            Console.Clear();
+            Console.WriteLine("Hangman Reworked is licensed under GNU GPL 3.0. \nThis program comes with ABSOLUTELY NO WARRANTY; for details type 'show w'. This is free software, and you are welcome to redistribute it under certain conditions; type 'show c' for details. \nPress any key to continue.");
+            Console.ReadKey();
             Console.Clear();
             Console.WriteLine("Welcome to hangman! \nPlease enter one character at a time, or the entire word. \nThere are no numbers or punctuation. \nYou have already been given the letters RSTLNE. \nTo exit, click the x button on the window, type \"exit\" into the console, or type CTRL + C at any time. \nGood luck, and have fun!");
             
@@ -114,8 +118,17 @@ namespace HangmanReworked {
 
                 // Get user input, determine string length, parse when able/neccessary
                 consoleInput = Console.ReadLine()!.ToLower();
-
-                if (consoleInput == guessThisWord) { // User guesses entire word
+                if (consoleInput == "show c") { // Show GNU GPL 3.0 Copyright/Distribution Information
+                    Console.WriteLine("This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. \nFor more information, visit https://www.gnu.org/licenses/. \n\nPress any key to continue.");
+                    Console.ReadKey();
+                    Console.Clear();
+                    continue;
+                } else if (consoleInput == "show w") { // Show GNU GPL 3.0 Warranty Information
+                    Console.WriteLine("This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. \nFor more information, visit https://www.gnu.org/licenses/. \n\nPress any key to continue.");
+                    Console.ReadKey();
+                    Console.Clear();
+                    continue;
+                } else if (consoleInput == guessThisWord) { // User guesses entire word
                     userWon = true;
                     dashesToString = guessThisWord;
                     Console.Clear();
