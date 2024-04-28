@@ -108,7 +108,7 @@ namespace HangmanReworked {
 
             // Game will NOT run while this is true, so set it to false
             breakpointReached = false;
-			
+            
             // Game Loop
             while (!breakpointReached) {
                 containsChar = false;
