@@ -1,4 +1,5 @@
-﻿/* HangmanReworked is a simple hangman game that runs in a console.
+﻿/* 
+ * HangmanReworked is a simple hangman game that runs in a console.
  * Copyright (C) 2024 Christopher Thorpe.
  * 
  * This program is free software: you can redistribute it and/or modify
