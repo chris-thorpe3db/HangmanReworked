@@ -23,6 +23,7 @@ using System.Threading.Tasks;
 namespace HangmanReworked {
     public class HangClient {
         static readonly HttpClient client = new HttpClient();
+        private static string responseBody = "";
         #nullable enable annotations
         public static async Task<string> GetWord(string? url) {
             // If the URL is null or empty, set it to the word API
@@ -34,7 +35,7 @@ namespace HangmanReworked {
             try {
                 HttpResponseMessage response = await client.GetAsync(url);
                 response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
+                responseBody = await response.Content.ReadAsStringAsync();
                 return responseBody;
             } catch (Exception e) {
                 throw new BadResponseCodeException(e.Message, url);
