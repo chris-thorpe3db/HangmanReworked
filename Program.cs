@@ -131,7 +131,7 @@ namespace HangmanReworked {
                 Console.WriteLine(dashesToString);
                 Console.WriteLine("Incorrect guesses left: " + incorrectGuessesLeft);
 
-                // Get user input, determine string length, parse when able/necessary
+                // Get user input, determine string length, grab 1st char of console input when able/necessary
                 consoleInput = Console.ReadLine()!.ToLower();
                 if (consoleInput == "show c")
                 {
