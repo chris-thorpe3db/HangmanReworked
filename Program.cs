@@ -57,7 +57,7 @@ namespace HangmanReworked {
                 if (playAgain == "n" || playAgain == "no") {
                     Console.WriteLine("Thanks for playing! \nCopyright (C) 2024 Christopher Thorpe. Licensed under GNU GPL v3.0.");
                     Thread.Sleep(3000);
-                    Exit(0);
+                    break;
                 } else if (playAgain == "y" || playAgain == "yes") {
                     continue;
                 } else {
