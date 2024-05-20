@@ -21,6 +21,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
+using static System.Environment;
+
 namespace HangmanReworked {
     public class Program {
 
@@ -233,10 +235,6 @@ namespace HangmanReworked {
             {
                 Console.WriteLine("You lost! The word was: " + guessThisWord);
             }
-        }
-
-        public static void Exit(int code) {
-            Environment.Exit(code);
         }
     }
 }
