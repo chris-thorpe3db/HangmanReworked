@@ -32,7 +32,6 @@ namespace HangmanReworked {
         readonly static string rstlne = "rstlne";
         static char[]? dashes = null;
         static char charGuessed = ' ';
-        static ConsoleKeyInfo aboutKey;
         readonly static char[] charsToTrim = { '[', ']', '"' };
         static List<char> charsGuessed = new List<char>();
         static bool wordIsNotExitOrAbout = false;
