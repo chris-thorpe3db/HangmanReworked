@@ -92,7 +92,7 @@ namespace HangmanReworked {
                     Console.WriteLine(e.Message);
                     Console.WriteLine("Press any key to exit...");
                     Console.ReadKey();
-                    Exit(0);
+                    Exit(1);
                 }
             }
 
