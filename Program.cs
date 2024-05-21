@@ -142,8 +142,7 @@ namespace HangmanReworked {
                 else if (consoleInput == "show w")
                 {
                     // Show GNU GPL 3.0 Warranty Information
-                    Console.WriteLine(
-                        "This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. \nFor more information, visit https://www.gnu.org/licenses/. \n\nPress any key to continue.");
+                    Console.WriteLine("This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. \nFor more information, visit https://www.gnu.org/licenses/. \n\nPress any key to continue.");
                     Console.ReadKey();
                     Console.Clear();
                     continue;
