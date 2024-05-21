@@ -16,28 +16,25 @@
  */
 
 using HangmanReworked.Exceptions;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace HangmanReworked {
-    public class HangClient {
-        static readonly HttpClient client = new HttpClient();
-        private static HttpResponseMessage response = new HttpResponseMessage();
-        private static string responseBody = "";
-        #nullable enable annotations
+    public static class HangClient {
+        static readonly HttpClient Client = new HttpClient();
+        private static HttpResponseMessage _response = new HttpResponseMessage();
+        private static string _responseBody = "";
+        
         public static async Task<string> GetWord(string? url) {
             // If the URL is null or empty, set it to the word API
-            if (url == null || url == "") {
+            if (string.IsNullOrEmpty(url)) {
                 url = "https://random-word-api.herokuapp.com/word?number=1";
             } 
             
             // Try to get the word from the API, return the word if successful
             try {
-                 response = await client.GetAsync(url);
-                response.EnsureSuccessStatusCode();
-                responseBody = await response.Content.ReadAsStringAsync();
-                return responseBody;
+                 _response = await Client.GetAsync(url);
+                _response.EnsureSuccessStatusCode();
+                _responseBody = await _response.Content.ReadAsStringAsync();
+                return _responseBody;
             } catch (Exception e) {
                 throw new BadResponseCodeException(e.Message, url);
             }
