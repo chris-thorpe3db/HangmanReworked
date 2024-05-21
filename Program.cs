@@ -188,7 +188,7 @@ namespace HangmanReworked {
                 charGuessed = consoleInput[0];
                 charsGuessed.Add(charGuessed);
 
-                // Compare guessed char to every char in the word; replace dashes as neccessary
+                // Compare guessed char to every char in the word; replace dashes as necessary
                 for (int i = 0; i < guessThisWord.Length; i++)
                 {
                     if (guessThisWord[i] == charGuessed)
