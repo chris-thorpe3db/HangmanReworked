@@ -216,8 +216,7 @@ namespace HangmanReworked {
 
             if (_userWon)
             {
-                Console.WriteLine("Congratulations! The word was: " + _guessThisWord + ". You had " +
-                                  _incorrectGuessesLeft + " incorrect guesses left.");
+                Console.WriteLine("Congratulations! The word was: " + _guessThisWord + ". You had " + _incorrectGuessesLeft + " incorrect guesses left.");
             }
             else
             {
