@@ -52,7 +52,7 @@ namespace HangmanReworked
                 PlayGame();
                 Console.WriteLine("Would you like to play again? (Y)es/(N)o");
                 _playAgain = Console.ReadLine()!.ToLower();
-                if (_playAgain == "n" || _playAgain == "no") 
+                if (_playAgain == "n" || _playAgain == "no")
                 {
                     Console.WriteLine("Thanks for playing! \nCopyright (C) 2024 Christopher Thorpe. Licensed under GNU GPL v3.0.");
                     Thread.Sleep(3000);
