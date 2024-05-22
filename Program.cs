@@ -158,7 +158,7 @@ namespace HangmanReworked {
                 {
                     // User wants to view the about page
                     Console.Clear();
-                    Console.WriteLine("Hangman Reworked is a simple hangman game that runs in a console. \nThis program is written in C# and runs on the .NET 8 runtime It was programmed by Christopher Thorpe. \nThis program is free under certain conditions. These conditions are detailed in the GNU GPL v3.0. \nYou can also view this program's source code in your web browser at \"https://github.com/chris-thorpe3db/HangmanReworked\". \n\nPress any key to continue.");
+                    Console.WriteLine("Hangman Reworked is a simple hangman game that runs in a console. \nThis program is written in C# and runs on the .NET 8 runtime. It was programmed by Christopher Thorpe. \nThis program is free under certain conditions. These conditions are detailed in the GNU GPL v3.0. \nYou can also view this program's source code in your web browser at \"https://github.com/chris-thorpe3db/HangmanReworked\". \n\nPress any key to continue.");
                     Console.ReadKey();
                     Console.Clear();
                     continue;
