@@ -150,7 +150,6 @@ namespace HangmanReworked
                 {
                     // User guesses entire word
                     _userWon = true;
-                    _dashesToString = _guessThisWord;
                     Console.Clear();
                     break;
                 }
