@@ -18,8 +18,10 @@
 
 using static System.Environment;
 
-namespace HangmanReworked {
-    public static class Program {
+namespace HangmanReworked 
+{
+    public static class Program 
+    {
         private static string? _guessThisWord;
         private static readonly string Url = "https://random-word-api.herokuapp.com/word?number=1";
         private static string? _dashesToString;
@@ -36,7 +38,8 @@ namespace HangmanReworked {
         private static bool _containsChar;
         private static int _incorrectGuessesLeft = 10;
         
-        public static void Main(string[] args) {
+        public static void Main(string[] args) 
+        {
             Console.Clear();
             Console.WriteLine("Hangman Reworked is licensed under GNU GPL 3.0. \nThis program comes with ABSOLUTELY NO WARRANTY; for details type 'show w'. This is free software, and you are welcome to redistribute it under certain conditions; type 'show c' for details. \nFor more information about this software itself, type 'about'. \nPress any key to continue.");
             Console.ReadKey();
@@ -44,11 +47,13 @@ namespace HangmanReworked {
             Console.WriteLine("Welcome to hangman! \nPlease enter one character at a time, or the entire word. \nThere are no numbers or punctuation. \nYou have already been given the letters RSTLNE. \nTo exit, click the x button on the window, type \"exit\" into the console, or type CTRL + C at any time. \nGood luck, and have fun!");
             
             // Plays Game, asks user if they would like to play again
-            while (true) {
+            while (true) 
+            {
                 PlayGame();
                 Console.WriteLine("Would you like to play again? (Y)es/(N)o");
                 _playAgain = Console.ReadLine()!.ToLower();
-                if (_playAgain == "n" || _playAgain == "no") {
+                if (_playAgain == "n" || _playAgain == "no") 
+                {
                     Console.WriteLine("Thanks for playing! \nCopyright (C) 2024 Christopher Thorpe. Licensed under GNU GPL v3.0.");
                     Thread.Sleep(3000);
                     break;
