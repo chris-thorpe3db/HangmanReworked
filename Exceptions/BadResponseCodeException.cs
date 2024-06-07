@@ -15,6 +15,8 @@
  * along with HangmanReworked. If not, see <https://www.gnu.org/licenses/>.
  */
 
+
+// Full disclosure: I stole this code from the microsoft docs and has no idea what the fuck it does.
 namespace HangmanReworked.Exceptions {
     public class BadResponseCodeException : Exception {
         public string URL { get; }

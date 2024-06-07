@@ -22,6 +22,7 @@ namespace HangmanReworked
 {
     public static class Program 
     {
+        // Declare (and initialize some) all the vars we need
         private static string? _guessThisWord;
         private static readonly string Url = "https://random-word-api.herokuapp.com/word?number=1";
         private static string? _dashesToString;
@@ -38,15 +39,19 @@ namespace HangmanReworked
         private static bool _containsChar;
         private static int _incorrectGuessesLeft = 10;
         
+        // Program Entry Point
         public static void Main(string[] args) 
         {
+            // Short GPL license notice
             Console.Clear();
             Console.WriteLine("Hangman Reworked is licensed under GNU GPL 3.0. \nThis program comes with ABSOLUTELY NO WARRANTY; for details type 'show w'. This is free software, and you are welcome to redistribute it under certain conditions; type 'show c' for details. \nFor more information about this software itself, type 'about'. \nPress any key to continue.");
             Console.ReadKey();
+            
+            // Short introduction
             Console.Clear();
             Console.WriteLine("Welcome to hangman! \nPlease enter one character at a time, or the entire word. \nThere are no numbers or punctuation. \nYou have already been given the letters RSTLNE. \nTo exit, click the x button on the window, type \"exit\" into the console, or type CTRL + C at any time. \nGood luck, and have fun!");
             
-            // Plays Game, asks user if they would like to play again
+            // We use a while loop here to allow for repeat plays
             while (true) 
             {
                 PlayGame();
@@ -95,16 +100,14 @@ namespace HangmanReworked
                 }
             }
 
-            // Create a char array of the word to guess, convert to string, so we can directly compare to the word
+            // Initialize the dashes char[] with a new array equal in length to the chosen word, fill with '-'
             _dashes = new char[_guessThisWord!.Length];
-            for (int i = 0; i < _guessThisWord.Length; i++)
-            {
+            foreach (char i in _dashes) {
                 _dashes[i] = '-';
             }
 
 
-            // Seek through char array for RSTLNE
-
+            // Give the player RSTLN and E, Wheel of Fortune style!
             for (int x = 0; x < _guessThisWord.Length; x++)
             {
                 foreach (var t in Rstlne)
@@ -114,21 +117,23 @@ namespace HangmanReworked
                 }
             }
 
-            // Add RSTLNE to guess chars list so the user doesn't accidentally guess them again
+            // Add RSTLNE to guessed chars list so the user isn't penalized for guessing them
             CharsGuessed.AddRange(Rstlne);
             _dashesToString = new string(_dashes);
 
-            // Game will NOT run while this is true, so set it to false
+            // Game loop hinges on this bool. Ensuring it is false here to ensure the loop doesn't immediately break
             _breakpointReached = false;
 
             // Game Loop
             while (!_breakpointReached)
             {
+                // Make sure the game doesn't think the user guessed a character
                 _containsChar = false;
+                
+                // Prompt for user input
                 Console.WriteLine(_dashesToString);
                 Console.WriteLine("Incorrect guesses left: " + _incorrectGuessesLeft);
 
-                // Get user input, determine string length, grab 1st char of console input when able/necessary
                 _consoleInput = Console.ReadLine()!.ToLower();
                 if (_consoleInput == "show c")
                 {
@@ -182,11 +187,11 @@ namespace HangmanReworked
                     continue;
                 }
 
-                // Parse string to char: allows us to compare to individual characters in a string
+                // User entered a single character that hasn't already been guessed, so we write it to its own variable and add it to the CharsGuessed list.
                 _charGuessed = _consoleInput[0];
                 CharsGuessed.Add(_charGuessed);
 
-                // Compare guessed char to every char in the word; replace dashes as necessary
+                // Check if the guessed char is in the word: If it is, replace the dashes with the guessed char and set containsChar to true.
                 for (int i = 0; i < _guessThisWord.Length; i++)
                 {
                     if (_guessThisWord[i] == _charGuessed)
@@ -196,11 +201,11 @@ namespace HangmanReworked
                     }
                 }
 
-                // Subtract guesses based on the value of containsChar
+                // Check the containsChar bool from earlier - decrement if false.
                 if (!_containsChar)
                     _incorrectGuessesLeft--;
 
-                // Convert char array to string, so we can compare it easily
+                // Convert char array to string as `string == char[]` doesn't work
                 _dashesToString = new string(_dashes);
 
                 // Check if the user has won or lost
