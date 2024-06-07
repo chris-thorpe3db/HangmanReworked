@@ -45,7 +45,7 @@ As long as you:
 
 By modifying or distributing this software, you agree to this license.
 
-The full license legal text can be found within [LICENSE](https://github.com/chris-thorpe3db/HangmanReworked/blob/master/LICENSE.md).
+The full license legal text can be found within [LICENSE](LICENSE.md).
 
 This software comes with absolutely no liability or warranty.
 
