@@ -4,6 +4,8 @@ Hangman is a game where the player guesses a word letter by letter until they ha
 
 This is a reworked and cleaner version of my older hangman game.
 
+NOTE: Dashes don't render at all in some terminals. This issue may or may not be fixed in future versions. I recommend using the default conhost.exe console on Windows, or your standard terminal emulator on Linux/Mac.
+
 ## Features
 
 Grabs words from a web API rather than a built-in array of words. This does mean that the application requires an internet connection.
