@@ -22,7 +22,7 @@ using System.Threading.Tasks;
 
 namespace HangmanReworked {
     public class HangClient {
-        // These vars may need to be reused, so we define and initialize them outside of the GetWord task.
+        // HttpClient is intended to be instantiated once per application, rather than per-use, so we define it outside the method
         static readonly HttpClient client = new HttpClient();
         private static HttpResponseMessage response = new HttpResponseMessage();
         private static string responseBody = "";

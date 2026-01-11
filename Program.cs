@@ -61,6 +61,8 @@ namespace HangmanReworked
                 {
                     Console.WriteLine("Thanks for playing! \nCopyright (C) 2024 Christopher Thorpe. Licensed under GNU GPL v3.0.");
                     Thread.Sleep(3000);
+
+                    // Break loop instead of using Environment.Exit because program will automatically end gracefully with code 0 after Main() finishes executing
                     break;
                 }
             }
@@ -87,11 +89,14 @@ namespace HangmanReworked
                 try
                 {
                     _guessThisWord = HangClient.GetWord(Url).Result.Trim(CharsToTrim);
+
+                    // 'About' and 'exit' are reserved words, so we need to ensure the API doesn't return them
                     if (_guessThisWord != "exit" && _guessThisWord != "about")
                         _wordIsNotExitOrAbout = true;
                 }
                 catch (Exception e)
                 {
+                    // The app WILL crash if there is no internet connection. Catch exeption, inform user, exit with code 1.
                     Console.WriteLine("Exception caught! Are you connected to the internet? \nDetails:\n");
                     Console.WriteLine(e.Message);
                     Console.WriteLine("Press any key to exit...");
@@ -100,14 +105,14 @@ namespace HangmanReworked
                 }
             }
 
-            // Initialize the dashes char[] with a new array equal in length to the chosen word, fill with '-'
+            // Initialize the dashes char[] with a new array equal in length to the chosen word, fill with '-' characters
             _dashes = new char[_guessThisWord!.Length];
             foreach (char i in _dashes) {
-                _dashes[i] = '-';
+                _dashes[i] = '_';
             }
 
 
-            // Give the player RSTLN and E, Wheel of Fortune style!
+            // Reveal RSTLNE characters in the dashes array, Wheel of Fortune style!
             for (int x = 0; x < _guessThisWord.Length; x++)
             {
                 foreach (var t in Rstlne)
@@ -117,17 +122,17 @@ namespace HangmanReworked
                 }
             }
 
-            // Add RSTLNE to guessed chars list so the user isn't penalized for guessing them
+            // Add RSTLNE to the guessed chars list so the user isn't penalized for guessing them again
             CharsGuessed.AddRange(Rstlne);
             _dashesToString = new string(_dashes);
 
-            // Game loop hinges on this bool. Ensuring it is false here to ensure the loop doesn't immediately break
+            // Game loop control variable
             _breakpointReached = false;
 
             // Game Loop
             while (!_breakpointReached)
             {
-                // Make sure the game doesn't think the user guessed a character
+                // Make sure the game doesn't think we guessed a char yet
                 _containsChar = false;
                 
                 // Prompt for user input
@@ -137,13 +142,13 @@ namespace HangmanReworked
                 _consoleInput = Console.ReadLine()!.ToLower();
                 if (_consoleInput == "show c")
                 {
-                    // Show GNU GPL 3.0 Copyright/Distribution Information
+                    // Show GNU GPL 3.0 Copyright Information
                     Console.WriteLine("This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. \nFor more information, visit https://www.gnu.org/licenses/. \n\nPress any key to continue.");
                     Console.ReadKey();
                     Console.Clear();
                     continue;
                 }
-                else if (_consoleInput == "show w")
+                if (_consoleInput == "show w")
                 {
                     // Show GNU GPL 3.0 Warranty Information
                     Console.WriteLine("This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. \nFor more information, visit https://www.gnu.org/licenses/. \n\nPress any key to continue.");
@@ -151,19 +156,19 @@ namespace HangmanReworked
                     Console.Clear();
                     continue;
                 }
-                else if (_consoleInput == _guessThisWord)
+                if (_consoleInput == _guessThisWord)
                 {
-                    // User guesses entire word
+                    // User guessed the entire word correctly, set victory bool and break loop
                     _userWon = true;
                     Console.Clear();
                     break;
                 }
-                else if (_consoleInput == "exit")
+                if (_consoleInput == "exit")
                 {
-                    // User wants to exit the game
+                    // User wants to exit the program, exit gracefully with code 0
                     Exit(0);
                 }
-                else if (_consoleInput == "about")
+                if (_consoleInput == "about")
                 {
                     // User wants to view the about page
                     Console.Clear();
@@ -172,26 +177,26 @@ namespace HangmanReworked
                     Console.Clear();
                     continue;
                 }
-                else if (_consoleInput.Length != 1)
+                if (_consoleInput.Length != 1)
                 {
-                    // Console input not 1 character, unable to parse
+                    // Console input greater than 1 character, but not entire word, repeat loop
                     Console.Clear();
                     Console.WriteLine("Please enter only 1 letter!");
                     continue;
                 }
-                else if (CharsGuessed.Contains(_consoleInput[0]))
+                if (CharsGuessed.Contains(_consoleInput[0]))
                 {
-                    // User already guessed this character
+                    // User already guessed this char, repeat loop
                     Console.Clear();
                     Console.WriteLine("You already guessed this character!");
                     continue;
                 }
 
-                // User entered a single character that hasn't already been guessed, so we write it to its own variable and add it to the CharsGuessed list.
+                // Default case: User guessed a single char, store it and add to guessed chars list
                 _charGuessed = _consoleInput[0];
                 CharsGuessed.Add(_charGuessed);
 
-                // Check if the guessed char is in the word: If it is, replace the dashes with the guessed char and set containsChar to true.
+                // Check if the guessed char is in the word, update dashes array as needed
                 for (int i = 0; i < _guessThisWord.Length; i++)
                 {
                     if (_guessThisWord[i] == _charGuessed)
@@ -201,14 +206,14 @@ namespace HangmanReworked
                     }
                 }
 
-                // Check the containsChar bool from earlier - decrement if false.
+                // Check the containsChar bool from earlier - decrement incorrect guesses if needed
                 if (!_containsChar)
                     _incorrectGuessesLeft--;
 
-                // Convert char array to string as `string == char[]` doesn't work
+                // Convert dashes array to string for display and win/loss checking
                 _dashesToString = new string(_dashes);
 
-                // Check if the user has won or lost
+                // Win/Loss checking
                 if (_dashesToString == _guessThisWord)
                 {
                     _userWon = true;
@@ -220,9 +225,11 @@ namespace HangmanReworked
                     _breakpointReached = true;
                 }
 
+                // Clear console output for next loop iteration
                 Console.Clear();
             }
 
+            // Game over, display win/loss message, back to Main() for replay prompt
             if (_userWon)
             {
                 Console.WriteLine("Congratulations! The word was: " + _guessThisWord + ". You had " + _incorrectGuessesLeft + " incorrect guesses left.");

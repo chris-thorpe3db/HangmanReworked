@@ -16,7 +16,7 @@
  */
 
 
-// Full disclosure: I stole this code from the microsoft docs and has no idea what the fuck it does.
+// Full Disclosure: I stole this code from Microsoft's documentation and have no idea what the fuck it does.
 namespace HangmanReworked.Exceptions {
     public class BadResponseCodeException : Exception {
         public string URL { get; }
