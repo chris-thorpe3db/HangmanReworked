@@ -16,13 +16,11 @@
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-using static System.Environment;
-
 namespace HangmanReworked 
 {
     public static class Program 
     {
-        // Declare (and initialize some) all the vars we need
+        // Declare and initialize all static vars
         private static string? _guessThisWord;
         private static readonly string Url = "https://random-word-api.herokuapp.com/word?number=1";
         private static string? _dashesToString;
@@ -38,8 +36,8 @@ namespace HangmanReworked
         private static bool _userWon;
         private static bool _containsChar;
         private static int _incorrectGuessesLeft = 10;
-        
-        // Program Entry Point
+
+        // Entry point
         public static void Main(string[] args) 
         {
             // Short GPL license notice
@@ -96,7 +94,7 @@ namespace HangmanReworked
                 }
                 catch (Exception e)
                 {
-                    // The app WILL crash if there is no internet connection. Catch exeption, inform user, exit with code 1.
+                    // The program WILL crash if there is no internet connection. Catch exeption, inform user, exit with code 1.
                     Console.WriteLine("Exception caught! Are you connected to the internet? \nDetails:\n");
                     Console.WriteLine(e.Message);
                     Console.WriteLine("Press any key to exit...");
@@ -238,6 +236,14 @@ namespace HangmanReworked
             {
                 Console.WriteLine("You lost! The word was: " + _guessThisWord);
             }
+        }
+
+        private static void Exit(int? codeNull)
+        {
+            int code = codeNull ?? 0;
+            Console.WriteLine("Thanks for playing! Copyright © 2026 Christopher Thorpe. All rights reserved.");
+            Thread.Sleep(1000);
+            Environment.Exit(code);
         }
     }
 }

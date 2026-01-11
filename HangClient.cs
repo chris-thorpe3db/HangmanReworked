@@ -16,9 +16,6 @@
  */
 
 using HangmanReworked.Exceptions;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace HangmanReworked {
     public class HangClient {
