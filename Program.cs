@@ -52,6 +52,7 @@ namespace HangmanReworked
             // We use a while loop here to allow for repeat plays
             while (true) 
             {
+                // (in mario voice) Let's-a-go!
                 PlayGame();
                 Console.WriteLine("Would you like to play again? (Y)es/(N)o");
                 _playAgain = Console.ReadLine()!.ToLower();
